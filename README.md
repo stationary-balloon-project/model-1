@@ -24,7 +24,7 @@
 - Gps
     - Name: Ublox NEO-6M v2
     - Price: R$35.89
-    - [Datasheet]("https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf")
+    - [Datasheet](https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf)
     - [Product]("https://produto.mercadolivre.com.br/MLB-866843391-modulo-gps-ublox-gy-gps6mv2-gy-neo6mv2-arduino-drone-_JM#position=7&search_layout=grid&type=item&tracking_id=9e195381-19e1-4987-845d-6dedf50ff14e")
 
 - LoRa transceiver
