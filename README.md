@@ -26,6 +26,7 @@
     - Price: R$35.89
     - [Datasheet](https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf)
     - [Product](https://produto.mercadolivre.com.br/MLB-866843391-modulo-gps-ublox-gy-gps6mv2-gy-neo6mv2-arduino-drone-_JM#position=7&search_layout=grid&type=item&tracking_id=9e195381-19e1-4987-845d-6dedf50ff14e)
+    - [Protocol info](https://content.u-blox.com/sites/default/files/products/documents/u-blox6_ReceiverDescrProtSpec_%28GPS.G6-SW-10018%29_Public.pdf)
 
 - LoRa transceiver
     - Name: E220-900T22D
@@ -39,7 +40,7 @@
     - [Datasheet](https://cdn.awsli.com.br/945/945993/arquivos/Datasheet-MicroSD-Module.pdf)
     - [Product](https://produto.mercadolivre.com.br/MLB-1258143723-modulo-leitor-carto-micro-sd-card-leituraescrita-arduino-_JM#position=4&search_layout=stack&type=item&tracking_id=cec8ea25-f28d-427e-80f6-b9b70b38717e)
 
-- Arduino Nano
+- 2x Arduino Nano
     - Name: Arduino Nano v3
     - Price: R$48.99
     - [Datasheet](https://docs.arduino.cc/static/1fba019ea5172a305581b4ae50ae7907/A000005-datasheet.pdf)
@@ -76,3 +77,59 @@
     - Price: R$14.94
     - No datasheet
     - [Product](https://pt.aliexpress.com/item/33059028332.html?pdp_npi=2%40dis%21BRL%21R%24%2024%2C90%21R%24%2014%2C94%21%21%21%21%21%402101c84a16725178603353310e2e1a%2167607152561%21btf&_t=pvid%3A58ac439b-7448-4cb8-9ab3-307d64b82cf1&afTraceInfo=33059028332__pc__pcBridgePPC__xxxxxx__1672517860&spm=a2g0o.ppclist.product.mainProduct&gatewayAdapt=glo2bra)
+
+# Structure map
+```
+  +---------------------+                                      +---------------------+
+  | recurrent measuring |                                      |    communication    |
+  |     instruments     |                                      |      interface      |
+  +---------------------+                                      +---------------------+ 
+             |                                                        |      A
+             V                                                        V      |
+    +-----------------+          +-------------------------------------------------------------------------------+
+    | recurrent data  |          |                                 user interface                                |
+    |     logger      |          |                                     manager                                   |
+    +-----------------+          +-------------------------------------------------------------------------------+              
+             |                            A                               A                           |
+             V                            |                               |                           V
++--------------------------------------------------------+     +---------------------+     +---------------------+
+|                     persistent                         |     | on-demand measuring |     |  on-demand controll | 
+|                       memory                           |     |     instruments     |     |     instruments     |
++--------------------------------------------------------+     +---------------------+     +---------------------+
+```
+
+# Reccurent measuring instruments
+
+- Gps
+- Gyroscope
+- Barometer
+- Thermometer
+
+# On-demand measuring instruments
+
+- Gps
+- Gyroscope
+- Barometer
+- Thermometer
+- Camera
+
+# On-demand controll instruments
+
+- Air pump
+
+# Recurrent data logger
+
+- Arduino Uno
+
+# User interface manager
+
+- Arduino Uno
+
+# Persistent memory
+
+- Micro SD card adapter
+
+# Communication interface
+
+- LoRa transceiver
+
