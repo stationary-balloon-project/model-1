@@ -136,6 +136,7 @@
 
 # Proccesses definiton
 
+```
 + command received ?
 |
 +-- yes + -- validate message
@@ -147,6 +148,7 @@
 +-- no + -- execute data logger
        |
        + -- save data
+```
 
 # Commands
 
