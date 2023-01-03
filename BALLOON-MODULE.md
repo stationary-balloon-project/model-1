@@ -39,8 +39,9 @@
     - Price: R$14.90
     - [Datasheet](https://cdn.awsli.com.br/945/945993/arquivos/Datasheet-MicroSD-Module.pdf)
     - [Product](https://produto.mercadolivre.com.br/MLB-1258143723-modulo-leitor-carto-micro-sd-card-leituraescrita-arduino-_JM#position=4&search_layout=stack&type=item&tracking_id=cec8ea25-f28d-427e-80f6-b9b70b38717e)
+    - [Sd card datasheet](https://images-na.ssl-images-amazon.com/images/I/91tTtUMDM3L.pdf)
 
-- 2x Arduino Nano
+- Arduino Nano
     - Name: Arduino Nano v3
     - Price: R$48.99
     - [Datasheet](https://docs.arduino.cc/static/1fba019ea5172a305581b4ae50ae7907/A000005-datasheet.pdf)
@@ -57,7 +58,7 @@
 - Camera
     - Name: OV7670
     - Price: R$29.61
-    - [Datasheet]("http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf)
+    - [Datasheet](http://web.mit.edu/6.111/www/f2016/tools/OV7670_2006.pdf)
     - [Product](https://www.baudaeletronica.com.br/modulo-camera-ov7670.html?gclid=CjwKCAiA2L-dBhACEiwAu8Q9YCqoU6HiNvY0Nws0U0OmLqag9VETw5bNvAiS_kELeQEwfFaZLjbi2RoCl2oQAvD_BwE)
 
 - Thermometer (?)
@@ -66,7 +67,7 @@
     - [Datasheet](https://www.analog.com/media/en/technical-documentation/data-sheets/ds18b20.pdf)
     - [Product](https://www.robocore.net/sensor-ambiente/sensor-de-temperatura-ds18b20-a-prova-de-agua?gclid=CjwKCAiA2L-dBhACEiwAu8Q9YPn4yVwDBSKP_bRPkigVyZ_loJTZfBAdes7nZLLc9-21l9zrNC0igBoCE4cQAvD_BwE)
 
-- Barometer / Thermometer
+- 2x Barometer / Thermometer
     - Name: Bmp180
     - Price: R$15.90
     - [Datasheet](https://cdn-shop.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf)
@@ -80,32 +81,32 @@
 
 # Structure map
 ```
-  +---------------------+                                      +---------------------+
-  | recurrent measuring |                                      |    communication    |
-  |     instruments     |                                      |      interface      |
-  +---------------------+                                      +---------------------+ 
-             |                                                        |      A
-             V                                                        V      |
-    +-----------------+          +-------------------------------------------------------------------------------+
-    | recurrent data  |          |                                 user interface                                |
-    |     logger      |          |                                     manager                                   |
-    +-----------------+          +-------------------------------------------------------------------------------+              
-             |                            A                               A                           |
-             V                            |                               |                           V
+                +---------------------+                        +---------------------+
+                | recurrent measuring |                        |    communication    |
+                |     instruments     |                        |      interface      |
+                +---------------------+                        +---------------------+ 
+                           |                                          |      A
+                           V                                          V      |
++----------------------------------------------------------------------------------------------------------------+
+|                   recurrent data                                 user interface                                |
+|                       logger                                         manager                                   |
++----------------------------------------------------------------------------------------------------------------+              
+                        |    A                                            A                           |
+                        V    |                                            |                           V
 +--------------------------------------------------------+     +---------------------+     +---------------------+
 |                     persistent                         |     | on-demand measuring |     |  on-demand controll | 
 |                       memory                           |     |     instruments     |     |     instruments     |
 +--------------------------------------------------------+     +---------------------+     +---------------------+
 ```
 
-# Reccurent measuring instruments
+## Reccurent measuring instruments
 
 - Gps
 - Gyroscope
 - Barometer
 - Thermometer
 
-# On-demand measuring instruments
+## On-demand measuring instruments
 
 - Gps
 - Gyroscope
@@ -113,23 +114,84 @@
 - Thermometer
 - Camera
 
-# On-demand controll instruments
+## On-demand controll instruments
 
 - Air pump
 
-# Recurrent data logger
+## Recurrent data logger
 
 - Arduino Uno
 
-# User interface manager
+## User interface manager
 
 - Arduino Uno
 
-# Persistent memory
+## Persistent memory
 
 - Micro SD card adapter
 
-# Communication interface
+## Communication interface
 
 - LoRa transceiver
 
+# Proccesses definiton
+
++ command received ?
+|
++-- yes + -- validate message
+|       |
+|       + -- wait data logger
+|       |
+|       + -- execute command
+|
++-- no + -- execute data logger
+       |
+       + -- save data
+
+# Commands
+
+- ReadGPS
+    - Request Pattern: `gps`
+    - Description: Reads the GPS module and return the received data.
+    - Response pattern: GPS protocol info on Eletronics section.
+    - Response example: `$GPGGA,092725.00,44.244273,N,7.769737,E,1,8,1.01,499.6,M,48.0,M,,0*5B`
+
+- ReadGyroscope
+    - Request Pattern: `gyr`
+    - Description: Returns the inclination info received from the Gyroscope module.
+    - Response pattern: `{x angle} {y angle} {z angle}`
+    - Response example: `8.29 37.4 -4.2`
+
+- ReadBarometer
+    - Request Pattern: `bar {n}`
+    - Description: Returns the pressure received from the Barometer module `{n}`.
+    - Response pattern: `{pressure in x Pa steps}`
+    - Response example: `25`
+
+- ReadThermometer
+    - Request Pattern: `the`
+    - Description: Returns the temperature received from the Thermometer module.
+    - Response pattern: `{temperature in x 0.1°C steps}`
+    - Response example: `10`
+
+- RunAirPump
+    - Request Pattern: `air {n}`
+    - Description: Air pump rotates `{n}` times.
+
+- TakePicture
+    - Request Pattern: `pic {channel} {quantity} {delay}`
+    - Request example: `pic 0 20 1`
+    - Description: Take `{quantity}` pictures, with a delay of `{delay}` seconds, returning just the channel `{channel}`.
+
+- GetFiles
+    - Request Pattern: `files [{name},]`
+    - Request example: `files log_1.txt,log_2.txt`
+    - Description: Returns the files content.
+
+- GetAllFiles
+    - Request Pattern: `files *`
+    - Description: Returns all file's content.
+
+- GetNFiles
+    - Request Pattern: `files {n} {order}`
+    - Description: Returns `{n}` file's content.
