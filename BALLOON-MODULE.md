@@ -30,9 +30,9 @@
 
 - LoRa transceiver
     - Name: E220-900T22D
-    - Price: R$27.05
+    - Price: R$56.43
     - [Datasheet](https://www.ebyte.com/en/product-view-news.html?id=1212)
-    - [Product](https://pt.aliexpress.com/item/1005002116919184.html?spm=a2g0o.productlist.0.0.50296b55OxbLln&algo_pvid=44d3e3b1-56af-401a-a3a1-98a2253610a2&aem_p4p_detail=202212311108211744666409939820017890642&algo_exp_id=44d3e3b1-56af-401a-a3a1-98a2253610a2-1&pdp_ext_f=%7B%22sku_id%22%3A%2212000018795984638%22%7D&pdp_npi=2%40dis%21BRL%2133.82%2127.05%21%21%21%21%21%402103209516725137016935440e7a9c%2112000018795984638%21sea&curPageLogUid=dukx5dEwRlmc&ad_pvid=202212311108211744666409939820017890642_2&ad_pvid=202212311108211744666409939820017890642_2)
+    - [Product](https://pt.aliexpress.com/item/1005002091094465.html?spm=a2g0o.productlist.0.0.5cf35f3fOYqcry&algo_pvid=9cd2f230-ea50-4f85-b076-fb827d851b33&aem_p4p_detail=202301021640131321971799477500026095788&algo_exp_id=9cd2f230-ea50-4f85-b076-fb827d851b33-0&pdp_ext_f=%7B%22sku_id%22%3A%2212000018710790598%22%7D&pdp_npi=2%40dis%21BRL%2156.43%2156.43%21%21%21%21%21%40210318bb16727064132458226e1c53%2112000018710790598%21sea&curPageLogUid=r9DImmJQ1OM2&ad_pvid=202301021640131321971799477500026095788_1&ad_pvid=202301021640131321971799477500026095788_1)
 
 - Micro SD card adapter
     - Name: Micro SD card adapter reader module
